@@ -14,6 +14,8 @@
     UILabel *titleLabel;
     UILabel *subtitleLabel;
     
+    NSString *subtitle;
+    
     BOOL needsAnimatedLabelLayout;
     
     BOOL setFrameCalled;
@@ -155,10 +157,14 @@
     subtitleLabel.textColor = self.subtitleColor;
     
     [titleLabel sizeToFit];
-    [subtitleLabel sizeToFit];
-    
     CGRect titleFrame = titleLabel.frame;
-    CGRect subtitleFrame = subtitleLabel.frame;
+    
+    CGRect subtitleFrame = CGRectZero;
+    if (subtitle || !animated) {            // if no subtitle but animated, keep the text until the animation is finished
+        subtitleLabel.text = subtitle;
+        [subtitleLabel sizeToFit];
+        subtitleFrame = subtitleLabel.frame;
+    }
     
     // vertical positioning
     if (!subtitleLabel.text) {
@@ -204,12 +210,13 @@
     if (subtitleLabel.alpha > 0.9) {    // was visible
         if (!shouldBeVisible) {             // will become invisible
             if (animated) {                     // animated
-                [UIView animateWithDuration:0.3
+                [UIView animateWithDuration:0.2
                                  animations:^{
                                      subtitleLabel.alpha = 0;
                                  } completion:^(BOOL finished) {
                                      if (finished) {
                                          subtitleLabel.hidden = YES;
+                                         subtitleLabel.text = subtitle;
                                      }
                                  }];
             } else {                            // without animation
@@ -254,12 +261,12 @@
 
 - (NSString *)subtitle
 {
-    return subtitleLabel.text;
+    return subtitle;
 }
 
 - (void)setSubtitle:(NSString *)text
 {
-    subtitleLabel.text = text;
+    subtitle = text;
     needsAnimatedLabelLayout = self.animateChanges;
     [self setNeedsLayout];
 }
