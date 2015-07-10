@@ -58,10 +58,6 @@
     subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     subtitleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
-//    self.backgroundColor = [UIColor blueColor];
-//    titleLabel.backgroundColor = [UIColor redColor];
-//    subtitleLabel.backgroundColor = [UIColor greenColor];
-    
     [self addSubview:titleLabel];
     [self addSubview:subtitleLabel];
 }
