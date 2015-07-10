@@ -13,6 +13,10 @@
     UINavigationBar *navigationBar;
     UILabel *titleLabel;
     UILabel *subtitleLabel;
+    
+    BOOL needsAnimatedLabelLayout;
+    
+    BOOL setFrameCalled;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -45,6 +49,8 @@
     self.spacing = 1;
     self.animateChanges = YES;
     
+    setFrameCalled = NO;
+    
     titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     subtitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -61,7 +67,7 @@
 - (void)applyDefaults
 {
     self.regularTitleFont = self.regularTitleFont ?: [UIFont boldSystemFontOfSize:17];
-    self.compactTitleFont = self.compactTitleFont ?: [UIFont boldSystemFontOfSize:17];
+    self.compactTitleFont = self.compactTitleFont ?: [UIFont boldSystemFontOfSize:16];
     self.regularSubtitleFont = self.regularSubtitleFont ?: [UIFont systemFontOfSize:12];
     self.compactSubtitleFont = self.compactSubtitleFont ?: [UIFont systemFontOfSize:12];
     self.titleColor = self.titleColor ?: [UIColor blackColor];
@@ -85,6 +91,7 @@
 
 - (void)setFrame:(CGRect)frame
 {
+    setFrameCalled = YES;
     [self findNavigationBar];
     
     if (navigationBar) {
@@ -118,10 +125,23 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+ 
+    [self layoutLabelsAnimated:needsAnimatedLabelLayout];
+}
+
+- (void)layoutLabelsAnimated:(BOOL)animated
+{
+    if (!setFrameCalled) {             // this is necessary to prevent an animation when the view is initially added to the navigation bar
+        return;
+    }
+    
+    if (animated) {
+        needsAnimatedLabelLayout = NO;
+    }
+    
     BOOL titleLabelWasInvisible = CGRectEqualToRect(titleLabel.frame, CGRectZero);
     BOOL subtitleLabelWasInvisible = CGRectEqualToRect(subtitleLabel.frame, CGRectZero);
-    
-    [super layoutSubviews];
     
     [self findNavigationBar];
     
@@ -130,7 +150,7 @@
     BOOL navigationBarIsCompact = navigationBarFrame.size.height < 43;
     titleLabel.font = navigationBarIsCompact ? self.compactTitleFont : self.regularTitleFont;
     subtitleLabel.font = navigationBarIsCompact ? self.compactSubtitleFont : self.regularSubtitleFont;
-
+    
     titleLabel.textColor = self.titleColor;
     subtitleLabel.textColor = self.subtitleColor;
     
@@ -153,7 +173,7 @@
         subtitleFrame.origin.y = CGRectGetMaxY(titleFrame) + self.spacing;
         subtitleFrame.origin.y = MIN(subtitleFrame.origin.y, self.frame.size.height - subtitleFrame.size.height);   // prevent bottom overflow: align bottom edge justified with parent frame
     }
-
+    
     // horizontal positioning
     titleFrame = [self xAlignFrame:titleFrame navigationBarFrame:navigationBarFrame];
     subtitleFrame = [self xAlignFrame:subtitleFrame navigationBarFrame:navigationBarFrame];
@@ -161,7 +181,7 @@
     
     // animations
     
-    if (titleLabelWasInvisible || !self.animateChanges) {
+    if (titleLabelWasInvisible || !animated) {
         titleLabel.frame = titleFrame;
     } else {
         [UIView animateWithDuration:0.3 animations:^{
@@ -170,32 +190,34 @@
     }
     
     // was visible
-        // will become invisible
-        // will become invisible animated
-        // will change frame
-        // will change frame animated
+    // will become invisible
+    // will become invisible animated
+    // will change frame
+    // will change frame animated
     
     // was not visible
-        // will become visible
-        // will become visible animated
-
+    // will become visible
+    // will become visible animated
+    
     BOOL shouldBeVisible = self.subtitle != nil;
-
-    if (!subtitleLabel.hidden) {        // was visible
+    
+    if (subtitleLabel.alpha > 0.9) {    // was visible
         if (!shouldBeVisible) {             // will become invisible
-            if (self.animateChanges) {          // animated
+            if (animated) {                     // animated
                 [UIView animateWithDuration:0.3
                                  animations:^{
                                      subtitleLabel.alpha = 0;
                                  } completion:^(BOOL finished) {
-                                     subtitleLabel.hidden = YES;
+                                     if (finished) {
+                                         subtitleLabel.hidden = YES;
+                                     }
                                  }];
             } else {                            // without animation
                 subtitleLabel.alpha = 0;
                 subtitleLabel.hidden = YES;
             }
         } else {                                                        // will cahnge frame
-            if (subtitleLabelWasInvisible || !self.animateChanges) {        // without animated
+            if (subtitleLabelWasInvisible || !animated) {                   // without animated
                 subtitleLabel.frame = subtitleFrame;
             } else {                                                        // animation
                 [UIView animateWithDuration:0.3
@@ -204,11 +226,11 @@
                                  }];
             }
         }
-    } else if (shouldBeVisible) {   // was not visible
+    } else if (shouldBeVisible) {       // was not visible
         subtitleLabel.frame = subtitleFrame;
         subtitleLabel.alpha = 0;
         subtitleLabel.hidden = NO;
-        if (self.animateChanges) {
+        if (animated) {
             [UIView animateWithDuration:0.3 animations:^{
                 subtitleLabel.alpha = 1;
             }];
@@ -226,6 +248,7 @@
 - (void)setTitle:(NSString *)text
 {
     titleLabel.text = text;
+    needsAnimatedLabelLayout = self.animateChanges;
     [self setNeedsLayout];
 }
 
@@ -237,6 +260,7 @@
 - (void)setSubtitle:(NSString *)text
 {
     subtitleLabel.text = text;
+    needsAnimatedLabelLayout = self.animateChanges;
     [self setNeedsLayout];
 }
 

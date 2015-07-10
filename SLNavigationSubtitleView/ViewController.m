@@ -31,12 +31,12 @@
 - (void)updateTitle
 {
     self.navigationItem.title = titleText.text;
-    subtitleView.title = titleText.text;
     if (![subtitleText.text isEqualToString:@""] && showSubtitle) {
         subtitleView.subtitle = subtitleText.text;
     } else {
         subtitleView.subtitle = nil;
     }
+    subtitleView.title = titleText.text;
 }
 
 - (IBAction)titleDidChange:(UITextField *)sender
@@ -44,16 +44,14 @@
     [self updateTitle];
 }
 
-- (IBAction)toggle:(UIButton *)sender
+- (IBAction)toggleTitleView:(UISegmentedControl *)sender
 {
     [self updateTitle];
     
-    if (self.navigationItem.titleView) {
+    if (sender.selectedSegmentIndex == 0) {
         self.navigationItem.titleView = nil;
-        [sender setTitle:@"Title View"  forState:UIControlStateNormal];
     } else {
         self.navigationItem.titleView = subtitleView;
-        [sender setTitle:@"Default"  forState:UIControlStateNormal];
     }
 }
 
