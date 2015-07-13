@@ -156,8 +156,22 @@
     CGRect titleFrame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y, titleSize.width, titleSize.height);
     
     CGRect subtitleFrame = CGRectZero;
-    if (subtitle || !animated) {            // if no subtitle but animated, keep the text until the animation is finished
+    if (subtitle || !animated) {            // if no subtitle but animated, keep the text until the animation is finished - otherwise (this case) change instantly
+        
+        // crossfade text change animation, if new subtitle does not contain the old subtitle
+        if (animated && subtitle && subtitleLabel.text) {
+            BOOL contained = [subtitle rangeOfString:subtitleLabel.text].location != NSNotFound || [subtitleLabel.text rangeOfString:subtitle].location != NSNotFound;
+            if (!contained) {
+                CATransition *animation = [CATransition animation];
+                animation.duration = 1.0;
+                animation.type = kCATransitionFade;
+                animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                [subtitleLabel.layer addAnimation:animation forKey:@"changeTextTransition"];
+            }
+        }
+        
         subtitleLabel.text = subtitle;
+
         CGSize subtitleSize = [subtitleLabel sizeThatFits:subtitleLabel.bounds.size];
         subtitleFrame = CGRectMake(subtitleFrame.origin.x, subtitleFrame.origin.y, subtitleSize.width, subtitleSize.height);
     }
