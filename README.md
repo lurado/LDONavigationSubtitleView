@@ -8,7 +8,7 @@
 
 Screenshots don't relly do this pod justice, but here's one:
 
-![Screenshot][https://raw.githubusercontent.com/sebastianludwig/SLNavigationSubtitleView/develop/Screenshots/demo_app.png]
+![Screenshot](https://raw.githubusercontent.com/sebastianludwig/SLNavigationSubtitleView/master/Screenshots/demo_app.png)
 
 ## Usage
 
