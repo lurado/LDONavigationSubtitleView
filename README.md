@@ -1,15 +1,22 @@
 # SLNavigationSubtitleView
 
-[![CI Status](http://img.shields.io/travis/Sebastian Ludwig/SLNavigationSubtitleView.svg?style=flat)](https://travis-ci.org/Sebastian Ludwig/SLNavigationSubtitleView)
 [![Version](https://img.shields.io/cocoapods/v/SLNavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/SLNavigationSubtitleView)
 [![License](https://img.shields.io/cocoapods/l/SLNavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/SLNavigationSubtitleView)
 [![Platform](https://img.shields.io/cocoapods/p/SLNavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/SLNavigationSubtitleView)
+
+## What does it look like?
+
+Screenshots don't relly do this pod justice, but here's one:
+
+![Screenshot][https://raw.githubusercontent.com/sebastianludwig/SLNavigationSubtitleView/develop/Screenshots/demo_app.png]
 
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+
+Requires iOS 7 or later. 
 
 ## Installation
 
