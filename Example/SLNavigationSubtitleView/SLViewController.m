@@ -29,18 +29,17 @@
     [super viewDidLoad];
     
     showSubtitle = YES;
-    self.navigationItem.title = titleText.text;
+    self.title = titleText.text;
 }
 
 - (IBAction)updateTitleView
 {
-    self.navigationItem.title = titleText.text;
+    self.title = titleText.text;
     if (![subtitleText.text isEqualToString:@""] && showSubtitle) {
         subtitleView.subtitle = subtitleText.text;
     } else {
         subtitleView.subtitle = nil;
     }
-    subtitleView.title = titleText.text;
 }
 
 - (IBAction)toggleTitleView:(UISegmentedControl *)sender

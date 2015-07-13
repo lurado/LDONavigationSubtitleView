@@ -105,6 +105,7 @@
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <action selector="updateTitleView" destination="atf-Mr-PNG" eventType="editingChanged" id="uV4-Mk-e4k"/>
+                                            <outlet property="delegate" destination="atf-Mr-PNG" id="gMK-Je-9qH"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Subtitle" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7oU-oS-F1l">
@@ -204,6 +205,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="viewController" destination="atf-Mr-PNG" id="1dH-RB-Ga6"/>
+                    </connections>
                 </view>
             </objects>
             <point key="canvasLocation" x="560" y="360"/>
