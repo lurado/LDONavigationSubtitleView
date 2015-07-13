@@ -152,14 +152,14 @@
     titleLabel.textColor = self.titleColor;
     subtitleLabel.textColor = self.subtitleColor;
     
-    [titleLabel sizeToFit];
-    CGRect titleFrame = titleLabel.frame;
+    CGSize titleSize = [titleLabel sizeThatFits:titleLabel.bounds.size];
+    CGRect titleFrame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y, titleSize.width, titleSize.height);
     
     CGRect subtitleFrame = CGRectZero;
     if (subtitle || !animated) {            // if no subtitle but animated, keep the text until the animation is finished
         subtitleLabel.text = subtitle;
-        [subtitleLabel sizeToFit];
-        subtitleFrame = subtitleLabel.frame;
+        CGSize subtitleSize = [subtitleLabel sizeThatFits:subtitleLabel.bounds.size];
+        subtitleFrame = CGRectMake(subtitleFrame.origin.x, subtitleFrame.origin.y, subtitleSize.width, subtitleSize.height);
     }
     
     // vertical positioning
