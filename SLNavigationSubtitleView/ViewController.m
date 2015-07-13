@@ -10,6 +10,10 @@
 
 #import "SLNavigationSubtitleView.h"
 
+@interface ViewController () <UITextFieldDelegate>
+
+@end
+
 @implementation ViewController
 {
     IBOutlet SLNavigationSubtitleView *subtitleView;
@@ -28,7 +32,7 @@
     self.navigationItem.title = titleText.text;
 }
 
-- (void)updateTitle
+- (IBAction)updateTitleView
 {
     self.navigationItem.title = titleText.text;
     if (![subtitleText.text isEqualToString:@""] && showSubtitle) {
@@ -39,14 +43,9 @@
     subtitleView.title = titleText.text;
 }
 
-- (IBAction)titleDidChange:(UITextField *)sender
-{
-    [self updateTitle];
-}
-
 - (IBAction)toggleTitleView:(UISegmentedControl *)sender
 {
-    [self updateTitle];
+    [self updateTitleView];
     
     if (sender.selectedSegmentIndex == 0) {
         self.navigationItem.titleView = nil;
@@ -58,7 +57,7 @@
 - (IBAction)toggleSubtitle:(UISwitch *)sender
 {
     showSubtitle = sender.on;
-    [self updateTitle];
+    [self updateTitleView];
 }
 
 - (IBAction)toggleAnimations:(UISwitch *)sender
@@ -98,6 +97,15 @@
             [sender setTitle:@"Hide" forState:UIControlStateNormal];
         }
     }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self updateTitleView];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

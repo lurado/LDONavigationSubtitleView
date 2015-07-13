@@ -104,15 +104,15 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
-                                            <action selector="titleDidChange:" destination="atf-Mr-PNG" eventType="editingChanged" id="T0G-kL-JaB"/>
+                                            <action selector="updateTitleView" destination="atf-Mr-PNG" eventType="editingChanged" id="uV4-Mk-e4k"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Subtitle" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7oU-oS-F1l">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Subtitle" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7oU-oS-F1l">
                                         <rect key="frame" x="10" y="76" width="521" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
-                                            <action selector="titleDidChange:" destination="atf-Mr-PNG" eventType="editingChanged" id="8fY-Yc-cNC"/>
+                                            <outlet property="delegate" destination="atf-Mr-PNG" id="pde-2f-Oh7"/>
                                         </connections>
                                     </textField>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4PR-y7-Mag">
