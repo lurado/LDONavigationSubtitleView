@@ -1,0 +1,6 @@
+framework module SLNavigationSubtitleView {
+  umbrella header "Pods-SLNavigationSubtitleView_Example-SLNavigationSubtitleView-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,14 @@
+PODS:
+  - SLNavigationSubtitleView (0.1.0)
+
+DEPENDENCIES:
+  - SLNavigationSubtitleView (from `../`)
+
+EXTERNAL SOURCES:
+  SLNavigationSubtitleView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SLNavigationSubtitleView: bea872ea98c7e0e0fda7fbd9e069e98b6e254d8a
+
+COCOAPODS: 0.37.2

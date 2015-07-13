@@ -1,0 +1,6 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'SLNavigationSubtitleView_Example', :exclusive => true do
+  pod "SLNavigationSubtitleView", :path => "../"
+end
