@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SLNavigationSubtitleView"
-  s.version          = "1.0.0"
+  s.version          = "1.1.0"
   s.summary          = "UINavigationItem title view with subtitle and nice animations."
   s.description      = <<-DESC
                        SLNavigationSubtitleView is a drop in replacement for the default
