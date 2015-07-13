@@ -45,6 +45,7 @@
     [self applyDefaults];
     
     [self.viewController addObserver:self forKeyPath:@"title" options:0 context:nil];
+    self.title = self.viewController.title;
 }
 
 - (void)initialize
