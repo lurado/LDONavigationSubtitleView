@@ -22,20 +22,19 @@
     IBOutlet UITextField *leftBarButtonText;
     IBOutlet UITextField *rightBarButtonText;
     
-    BOOL showSubtitle;
+    IBOutlet UISwitch *showSubtitle;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    showSubtitle = YES;
     self.title = titleText.text;
 }
 
 - (IBAction)updateTitleView
 {
     self.title = titleText.text;
-    if (![subtitleText.text isEqualToString:@""] && showSubtitle) {
+    if (![subtitleText.text isEqualToString:@""] && showSubtitle.on) {
         subtitleView.subtitle = subtitleText.text;
     } else {
         subtitleView.subtitle = nil;
@@ -55,7 +54,6 @@
 
 - (IBAction)toggleSubtitle:(UISwitch *)sender
 {
-    showSubtitle = sender.on;
     [self updateTitleView];
 }
 

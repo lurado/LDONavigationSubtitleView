@@ -195,6 +195,7 @@
                     <connections>
                         <outlet property="leftBarButtonText" destination="I49-YQ-b7E" id="PWs-bf-Lvl"/>
                         <outlet property="rightBarButtonText" destination="o88-ae-G3Q" id="8GD-ci-Fqm"/>
+                        <outlet property="showSubtitle" destination="4PR-y7-Mag" id="fNf-Ep-jnE"/>
                         <outlet property="subtitleText" destination="7oU-oS-F1l" id="5xD-gd-aWI"/>
                         <outlet property="subtitleView" destination="gWp-mn-mPE" id="YXo-TJ-ZEm"/>
                         <outlet property="titleText" destination="D0U-SW-ahW" id="waa-1G-zT4"/>
