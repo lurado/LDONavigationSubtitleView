@@ -10,12 +10,17 @@
 Pod::Spec.new do |s|
   s.name             = "SLNavigationSubtitleView"
   s.version          = "1.0.0"
-  s.summary          = "A short description of SLNavigationSubtitleView."
+  s.summary          = "UINavigationItem title view with subtitle and nice animations."
   s.description      = <<-DESC
-                       An optional longer description of SLNavigationSubtitleView
+                       SLNavigationSubtitleView is a drop in replacement for the default
+                       navigation item title that is displayed in a UINavigationBar. If you
+                       only set a title, it looks just like the default. However, it supports
+                       an optional subtitle to be displayed unterneath the title.
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       * Changes to title or subtitle can be animated (optional)
+                       * Supports Interface Builder customization
+                       * Looks good in Landscape & Portrait
+                       * Universal for iPhone and iPad
                        DESC
   s.homepage         = "https://github.com/sebastianludwig/SLNavigationSubtitleView"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
