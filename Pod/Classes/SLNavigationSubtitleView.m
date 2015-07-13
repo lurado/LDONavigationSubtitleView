@@ -19,8 +19,6 @@
     BOOL needsAnimatedLabelLayout;
     
     BOOL setFrameCalled;
-
-    BOOL observerAdded;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -45,15 +43,8 @@
     [super awakeFromNib];
     
     [self applyDefaults];
-}
-
-- (void)didMoveToSuperview
-{
-    [super didMoveToSuperview];
     
-    [self findNavigationBar];
-    
-    self.viewController = _viewController;  // trigger setter logic
+    self.viewController = _viewController;      // trigger setter logic
 }
 
 - (void)initialize
@@ -85,22 +76,15 @@
 
 - (void)dealloc
 {
-    if (observerAdded) {
-        [_viewController removeObserver:self forKeyPath:@"title"];
-    }
+    [_viewController removeObserver:self forKeyPath:@"title"];
 }
 
 - (void)setViewController:(UIViewController *)viewController
 {
-    if (observerAdded) {
-        [_viewController removeObserver:self forKeyPath:@"title"];
-    }
-    
+    [_viewController removeObserver:self forKeyPath:@"title"];
     _viewController = viewController;
     self.title = _viewController.title;
-    
     [_viewController addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
-    observerAdded = YES;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
