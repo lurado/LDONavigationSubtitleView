@@ -26,4 +26,6 @@
 
 @property (nonatomic) BOOL IBInspectable animateChanges;
 
+@property (nonatomic, weak) IBOutlet UIViewController *viewController;
+
 @end

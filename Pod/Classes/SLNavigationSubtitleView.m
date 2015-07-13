@@ -43,6 +43,8 @@
     [super awakeFromNib];
     
     [self applyDefaults];
+    
+    [self.viewController addObserver:self forKeyPath:@"title" options:0 context:nil];
 }
 
 - (void)initialize
@@ -70,6 +72,25 @@
     self.compactSubtitleFont = self.compactSubtitleFont ?: [UIFont systemFontOfSize:12];
     self.titleColor = self.titleColor ?: [UIColor blackColor];
     self.subtitleColor = self.subtitleColor ?: [UIColor lightGrayColor];
+}
+
+- (void)dealloc
+{
+    [_viewController removeObserver:self forKeyPath:@"title"];
+}
+
+- (void)setViewController:(UIViewController *)viewController
+{
+    [_viewController removeObserver:self forKeyPath:@"title"];
+    _viewController = viewController;
+    [_viewController addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"title"]) {
+        self.title = change[NSKeyValueChangeNewKey];
+    }
 }
 
 - (void)findNavigationBar {
