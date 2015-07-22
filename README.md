@@ -6,7 +6,7 @@
 
 ## What does it look like?
 
-Screenshots don't relly do this pod justice, but here's one:
+Screenshots don't really do this pod justice, but here's one:
 
 ![Screenshot](https://raw.githubusercontent.com/sebastianludwig/SLNavigationSubtitleView/master/Screenshots/demo_app.png)
 
