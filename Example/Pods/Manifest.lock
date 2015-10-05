@@ -1,14 +1,14 @@
 PODS:
-  - SLNavigationSubtitleView (0.1.0)
+  - LDONavigationSubtitleView (1.1.2)
 
 DEPENDENCIES:
-  - SLNavigationSubtitleView (from `../`)
+  - LDONavigationSubtitleView (from `../`)
 
 EXTERNAL SOURCES:
-  SLNavigationSubtitleView:
+  LDONavigationSubtitleView:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SLNavigationSubtitleView: bea872ea98c7e0e0fda7fbd9e069e98b6e254d8a
+  LDONavigationSubtitleView: 17685b3748e7fbda8439e6e64863f5038eb39552
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2

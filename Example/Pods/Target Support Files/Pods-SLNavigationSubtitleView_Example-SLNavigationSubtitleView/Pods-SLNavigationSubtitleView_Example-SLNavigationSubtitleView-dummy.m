@@ -1,5 +1,0 @@
-#import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_SLNavigationSubtitleView_Example_SLNavigationSubtitleView : NSObject
-@end
-@implementation PodsDummy_Pods_SLNavigationSubtitleView_Example_SLNavigationSubtitleView
-@end

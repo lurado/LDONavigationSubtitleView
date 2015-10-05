@@ -1,14 +1,14 @@
-# SLNavigationSubtitleView
+# LDONavigationSubtitleView
 
-[![Version](https://img.shields.io/cocoapods/v/SLNavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/SLNavigationSubtitleView)
-[![License](https://img.shields.io/cocoapods/l/SLNavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/SLNavigationSubtitleView)
-[![Platform](https://img.shields.io/cocoapods/p/SLNavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/SLNavigationSubtitleView)
+[![Version](https://img.shields.io/cocoapods/v/LDONavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/LDONavigationSubtitleView)
+[![License](https://img.shields.io/cocoapods/l/LDONavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/LDONavigationSubtitleView)
+[![Platform](https://img.shields.io/cocoapods/p/LDONavigationSubtitleView.svg?style=flat)](http://cocoapods.org/pods/LDONavigationSubtitleView)
 
 ## What does it look like?
 
 Screenshots don't really do this pod justice, but here's one:
 
-![Screenshot](https://raw.githubusercontent.com/sebastianludwig/SLNavigationSubtitleView/master/Screenshots/demo_app.png)
+![Screenshot](https://raw.githubusercontent.com/lurado/LDONavigationSubtitleView/master/Screenshots/demo_app.png)
 
 ## Usage
 
@@ -20,17 +20,17 @@ Requires iOS 7 or later.
 
 ## Installation
 
-SLNavigationSubtitleView is available through [CocoaPods](http://cocoapods.org). To install
+LDONavigationSubtitleView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "SLNavigationSubtitleView"
+pod "LDONavigationSubtitleView"
 ```
 
 ## Author
 
-Sebastian Ludwig, sebastian@lurado.de
+Julian Raschke und Sebastian Ludwig GbR, info@lurado.com
 
 ## License
 
-SLNavigationSubtitleView is available under the MIT license. See the LICENSE file for more info.
+LDONavigationSubtitleView is available under the MIT license. See the LICENSE file for more info.
