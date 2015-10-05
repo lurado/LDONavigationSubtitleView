@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SLNavigationSubtitleView"
-  s.version          = "1.1.2"
+  s.version          = "1.1.2.1"
   s.summary          = "UINavigationItem title view with subtitle and nice animations."
   s.description      = <<-DESC
                        SLNavigationSubtitleView is a drop in replacement for the default
@@ -30,6 +30,8 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
+
+  s.deprecated_in_favor_of = 'LDONavigationSubtitleView'
 
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
