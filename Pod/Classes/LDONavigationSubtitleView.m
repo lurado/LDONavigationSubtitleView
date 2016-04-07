@@ -51,7 +51,7 @@
 {
     self.backgroundColor = [UIColor clearColor];
     self.spacing = 1;
-    self.animateChanges = YES;
+    self.animateChanges = NO;
     
     setFrameCalled = NO;
     
