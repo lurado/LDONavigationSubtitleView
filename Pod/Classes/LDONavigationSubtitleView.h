@@ -24,7 +24,7 @@
 @property (nonatomic) IBInspectable UIFont *regularSubtitleFont;
 @property (nonatomic) IBInspectable UIFont *compactSubtitleFont;
 
-@property (nonatomic) BOOL IBInspectable animateChanges;
+@property (nonatomic) IBInspectable BOOL animateChanges;
 
 @property (nonatomic, weak) IBOutlet UIViewController *viewController;
 
