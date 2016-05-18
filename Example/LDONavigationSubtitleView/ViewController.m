@@ -29,6 +29,7 @@
     [super viewDidLoad];
     
     self.title = titleText.text;
+    subtitleView.animateChanges = YES;
 }
 
 - (IBAction)updateTitleView

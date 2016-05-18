@@ -16,6 +16,7 @@
 		6003F59E195388D20070C39A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* AppDelegate.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		9E3EC9D01CEC572D00F9C584 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EC9CF1CEC572D00F9C584 /* LaunchScreen.storyboard */; };
 		9EF2C6521B53F1AE000D2155 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF2C6511B53F1AE000D2155 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		6916821FAF3FCB83AEFB652B /* libPods-LDONavigationSubtitleView_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LDONavigationSubtitleView_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E32D0F1CB1F90CD7337F98 /* LDONavigationSubtitleView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LDONavigationSubtitleView.podspec; path = ../LDONavigationSubtitleView.podspec; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9E3EC9CF1CEC572D00F9C584 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EF2C6501B53F1AE000D2155 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9EF2C6511B53F1AE000D2155 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E43ABDC4623DEFF533113CC9 /* Pods-LDONavigationSubtitleView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LDONavigationSubtitleView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LDONavigationSubtitleView_Example/Pods-LDONavigationSubtitleView_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				9EF2C6501B53F1AE000D2155 /* ViewController.h */,
 				9EF2C6511B53F1AE000D2155 /* ViewController.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				9E3EC9CF1CEC572D00F9C584 /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -188,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				9E3EC9D01CEC572D00F9C584 /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
