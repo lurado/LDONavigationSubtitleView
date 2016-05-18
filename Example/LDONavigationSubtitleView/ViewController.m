@@ -91,7 +91,9 @@
             self.navigationItem.rightBarButtonItem = nil;
             [sender setTitle:@"Show" forState:UIControlStateNormal];
         } else {
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:rightBarButtonText.text style:UIBarButtonItemStylePlain target:nil action:nil];
+            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:rightBarButtonText.text style:UIBarButtonItemStylePlain target:nil action:nil];
+            [self.navigationItem setRightBarButtonItem:item animated:YES];
+            [navigationView setNeedsLayout];
             [sender setTitle:@"Hide" forState:UIControlStateNormal];
         }
     }
