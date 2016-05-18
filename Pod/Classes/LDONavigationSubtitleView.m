@@ -18,6 +18,8 @@
     
 @property (nonatomic) BOOL setFrameCalled;
 
+@property (nonatomic) NSArray<NSString *> *watchedKeyPaths;
+
 @end
 
 @implementation LDONavigationSubtitleView
@@ -41,6 +43,13 @@
 
 - (void)initialize
 {
+    self.watchedKeyPaths = @[
+                             @"title",
+                             @"navigationItem.leftBarButtonItem",
+                             @"navigationItem.leftBarButtonItems",
+                             @"navigationItem.rightBarButtonItem",
+                             @"navigationItem.rightBarButtonItems"
+                             ];
     self.backgroundColor = [UIColor clearColor];
     _spacing = 1;
     
@@ -75,7 +84,21 @@
 
 - (void)dealloc
 {
-    [_viewController removeObserver:self forKeyPath:@"title"];
+    [self removeKVO];
+}
+
+- (void)removeKVO
+{
+    for (NSString *keyPath in self.watchedKeyPaths) {
+        [self.viewController removeObserver:self forKeyPath:keyPath];
+    }
+}
+
+- (void)addKVO
+{
+    for (NSString *keyPath in self.watchedKeyPaths) {
+        [self.viewController addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:nil];
+    }
 }
 
 - (void)setSubtitleView:(UIView *)subtitleView
@@ -92,14 +115,10 @@
 
 - (void)setViewController:(UIViewController *)viewController
 {
-    [_viewController removeObserver:self forKeyPath:@"title"];
+    [self removeKVO];
     _viewController = viewController;
     self.title = _viewController.title;
-    [_viewController addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
-    [_viewController addObserver:self forKeyPath:@"navigationItem.leftBarButtonItem" options:NSKeyValueObservingOptionNew context:nil];
-    [_viewController addObserver:self forKeyPath:@"navigationItem.leftBarButtonItems" options:NSKeyValueObservingOptionNew context:nil];
-    [_viewController addObserver:self forKeyPath:@"navigationItem.rightBarButtonItem" options:NSKeyValueObservingOptionNew context:nil];
-    [_viewController addObserver:self forKeyPath:@"navigationItem.rightBarButtonItems" options:NSKeyValueObservingOptionNew context:nil];
+    [self addKVO];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
