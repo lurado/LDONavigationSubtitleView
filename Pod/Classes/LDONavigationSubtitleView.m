@@ -43,9 +43,6 @@
 {
     self.backgroundColor = [UIColor clearColor];
     _spacing = 1;
-    _animateChanges = NO;
-    
-    _setFrameCalled = NO;
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -79,6 +76,18 @@
 - (void)dealloc
 {
     [_viewController removeObserver:self forKeyPath:@"title"];
+}
+
+- (void)setSubtitleView:(UIView *)subtitleView
+{
+    _subtitleView = subtitleView;
+    if (subtitleView) {
+        [self.subtitleLabel removeFromSuperview];
+        [self addSubview:subtitleView];
+    } else {
+        [self.subtitleView removeFromSuperview];
+        [self addSubview:self.subtitleLabel];
+    }
 }
 
 - (void)setViewController:(UIViewController *)viewController
@@ -162,7 +171,7 @@
     }
     
     BOOL titleLabelWasInvisible = CGRectEqualToRect(self.titleLabel.frame, CGRectZero);
-    BOOL subtitleLabelWasInvisible = CGRectEqualToRect(self.subtitleLabel.frame, CGRectZero);
+    BOOL subtitleViewWasInvisible = CGRectEqualToRect(self.subtitleView.frame, CGRectZero);
     
     [self findNavigationBar];
     
@@ -178,8 +187,12 @@
     CGSize titleSize = [self.titleLabel sizeThatFits:self.titleLabel.bounds.size];
     CGRect titleFrame = CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y, titleSize.width, titleSize.height);
     
+    BOOL customSubtitleView = self.subtitleView != self.subtitleLabel;
     CGRect subtitleFrame = CGRectZero;
-    if (self.subtitle || !animated) {            // if no subtitle but animated, keep the text until the animation is finished - otherwise (this case) change instantly
+    if (customSubtitleView) {
+        [self.subtitleView sizeToFit];
+        subtitleFrame = self.subtitleView.frame;
+    } else if (self.subtitle || !animated) {            // if no subtitle but animated, keep the text until the animation is finished - otherwise (this case) change instantly
         
         // crossfade text change animation, if new subtitle does not contain the old subtitle
         if (animated && self.subtitle && self.subtitleLabel.text) {
@@ -196,21 +209,21 @@
         self.subtitleLabel.text = self.subtitle;
 
         CGSize subtitleSize = [self.subtitleLabel sizeThatFits:self.subtitleLabel.bounds.size];
-        subtitleFrame = CGRectMake(subtitleFrame.origin.x, subtitleFrame.origin.y, subtitleSize.width, subtitleSize.height);
+        subtitleFrame = CGRectMake(0, 0, subtitleSize.width, subtitleSize.height);
     }
     
     // vertical positioning
-    if (!self.subtitleLabel.text) {
-        titleFrame.origin.y = (self.frame.size.height - titleFrame.size.height) / 2;
-        if (navigationBarIsCompact) {
-            titleFrame.origin.y -= 1;
-        }
-    } else {
+    if (self.subtitleLabel.text || customSubtitleView) {
         titleFrame.origin.y = (self.frame.size.height - (titleFrame.size.height + subtitleFrame.size.height + self.spacing)) / 2;
         titleFrame.origin.y = MAX(0, titleFrame.origin.y);    // prevent top overflow: align no further down than justified with the top edge
         
         subtitleFrame.origin.y = CGRectGetMaxY(titleFrame) + self.spacing;
         subtitleFrame.origin.y = MIN(subtitleFrame.origin.y, self.frame.size.height - subtitleFrame.size.height);   // prevent bottom overflow: align bottom edge justified with parent frame
+    } else {
+        titleFrame.origin.y = (self.frame.size.height - titleFrame.size.height) / 2;
+        if (navigationBarIsCompact) {
+            titleFrame.origin.y -= 1;
+        }
     }
     
     // horizontal positioning
@@ -238,44 +251,44 @@
     // will become visible
     // will become visible animated
     
-    BOOL shouldBeVisible = self.subtitle != nil;
+    BOOL shouldBeVisible = self.subtitle != nil || customSubtitleView;
     
-    if (self.subtitleLabel.alpha > 0.9) {    // was visible
+    if (self.subtitleView.alpha > 0.9) {    // was visible
         if (!shouldBeVisible) {             // will become invisible
             if (animated) {                     // animated
                 [UIView animateWithDuration:0.2
                                  animations:^{
-                                     self.subtitleLabel.alpha = 0;
+                                     self.subtitleView.alpha = 0;
                                  } completion:^(BOOL finished) {
                                      if (finished) {
-                                         self.subtitleLabel.hidden = YES;
+                                         self.subtitleView.hidden = YES;
                                          self.subtitleLabel.text = self.subtitle;
                                      }
                                  }];
             } else {                            // without animation
-                self.subtitleLabel.alpha = 0;
-                self.subtitleLabel.hidden = YES;
+                self.subtitleView.alpha = 0;
+                self.subtitleView.hidden = YES;
             }
         } else {                                                        // will cahnge frame
-            if (subtitleLabelWasInvisible || !animated) {                   // without animated
-                self.subtitleLabel.frame = subtitleFrame;
+            if (subtitleViewWasInvisible || !animated) {                   // without animated
+                self.subtitleView.frame = subtitleFrame;
             } else {                                                        // animation
                 [UIView animateWithDuration:0.3
                                  animations:^{
-                                     self.subtitleLabel.frame = subtitleFrame;
+                                     self.subtitleView.frame = subtitleFrame;
                                  }];
             }
         }
     } else if (shouldBeVisible) {       // was not visible
-        self.subtitleLabel.frame = subtitleFrame;
-        self.subtitleLabel.alpha = 0;
-        self.subtitleLabel.hidden = NO;
+        self.subtitleView.frame = subtitleFrame;
+        self.subtitleView.alpha = 0;
+        self.subtitleView.hidden = NO;
         if (animated) {
             [UIView animateWithDuration:0.3 animations:^{
-                self.subtitleLabel.alpha = 1;
+                self.subtitleView.alpha = 1;
             }];
         } else {
-            self.subtitleLabel.alpha = 1;
+            self.subtitleView.alpha = 1;
         }
     }
 }
