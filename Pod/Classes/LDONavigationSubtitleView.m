@@ -196,7 +196,6 @@
     BOOL customSubtitleView = self.subtitleView != self.subtitleLabel;
     CGRect subtitleFrame = CGRectZero;
     if (customSubtitleView) {
-        [self.subtitleView sizeToFit];
         subtitleFrame = self.subtitleView.frame;
     } else if (self.subtitle || !animated) {            // if no subtitle but animated, keep the text until the animation is finished - otherwise (this case) change instantly
         
