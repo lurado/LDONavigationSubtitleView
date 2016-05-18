@@ -16,7 +16,7 @@
 
 @implementation ViewController
 {
-    IBOutlet LDONavigationSubtitleView *subtitleView;
+    IBOutlet LDONavigationSubtitleView *navigationView;
     IBOutlet UITextField *titleText;
     IBOutlet UITextField *subtitleText;
     IBOutlet UITextField *leftBarButtonText;
@@ -29,16 +29,16 @@
     [super viewDidLoad];
     
     self.title = titleText.text;
-    subtitleView.animateChanges = YES;
+    navigationView.animateChanges = YES;
 }
 
 - (IBAction)updateTitleView
 {
     self.title = titleText.text;
     if (![subtitleText.text isEqualToString:@""] && showSubtitle.on) {
-        subtitleView.subtitle = subtitleText.text;
+        navigationView.subtitle = subtitleText.text;
     } else {
-        subtitleView.subtitle = nil;
+        navigationView.subtitle = nil;
     }
 }
 
@@ -49,7 +49,7 @@
     if (sender.selectedSegmentIndex == 0) {
         self.navigationItem.titleView = nil;
     } else {
-        self.navigationItem.titleView = subtitleView;
+        self.navigationItem.titleView = navigationView;
     }
 }
 
@@ -60,7 +60,7 @@
 
 - (IBAction)toggleAnimations:(UISwitch *)sender
 {
-    subtitleView.animateChanges = sender.on;
+    navigationView.animateChanges = sender.on;
 }
 
 - (IBAction)barButtonTextDidChange:(UITextField *)sender
