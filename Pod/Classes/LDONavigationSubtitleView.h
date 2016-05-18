@@ -10,8 +10,8 @@
 
 @interface LDONavigationSubtitleView : UIView
 
-@property (nonatomic, copy) IBInspectable NSString* title;
-@property (nonatomic, copy) IBInspectable NSString* subtitle;
+@property (nonatomic, copy) IBInspectable NSString *title;
+@property (nonatomic, copy) IBInspectable NSString *subtitle;
 
 @property (nonatomic) IBInspectable NSInteger spacing;
 
@@ -26,6 +26,8 @@
 
 @property (nonatomic) IBInspectable BOOL animateChanges;
 
+
+@property (nonatomic) IBOutlet UIView *subtitleView;
 @property (nonatomic, weak) IBOutlet UIViewController *viewController;
 
 @end
