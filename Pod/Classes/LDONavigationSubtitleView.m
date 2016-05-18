@@ -19,6 +19,7 @@
 @property (nonatomic) BOOL setFrameCalled;
 
 @property (nonatomic) NSArray<NSString *> *watchedKeyPaths;
+@property (nonatomic) BOOL observingKeyPaths;
 
 @end
 
@@ -82,23 +83,40 @@
     self.subtitleColor = self.subtitleColor ?: [UIColor lightGrayColor];
 }
 
-- (void)dealloc
+- (void)removeFromSuperview
 {
+    [super removeFromSuperview];
     [self removeKVO];
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    [super willMoveToSuperview:newSuperview];
+    [self addKVO];
 }
 
 - (void)removeKVO
 {
+    if (!self.observingKeyPaths) {
+        return;
+    }
+    
     for (NSString *keyPath in self.watchedKeyPaths) {
         [self.viewController removeObserver:self forKeyPath:keyPath];
     }
+    self.observingKeyPaths = NO;
 }
 
 - (void)addKVO
 {
+    if (self.observingKeyPaths || !self.viewController) {
+        return;
+    }
+    
     for (NSString *keyPath in self.watchedKeyPaths) {
         [self.viewController addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:nil];
     }
+    self.observingKeyPaths = YES;
 }
 
 - (void)setSubtitleView:(UIView *)subtitleView
