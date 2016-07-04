@@ -14,6 +14,8 @@ Screenshots don't really do this pod justice, but here's one:
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+If you want the subtitle view to pick up a view controllers `title`, connect it to the subtitle views `viewController` outlet property (in code or IB).
+
 ## Requirements
 
 Requires iOS 7 or later. 
