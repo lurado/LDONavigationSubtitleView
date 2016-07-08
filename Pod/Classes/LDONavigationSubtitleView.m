@@ -46,6 +46,7 @@
 {
     self.watchedKeyPaths = @[
                              @"title",
+                             @"navigationItem.title",
                              @"navigationItem.leftBarButtonItem",
                              @"navigationItem.leftBarButtonItems",
                              @"navigationItem.rightBarButtonItem",
@@ -135,7 +136,7 @@
 {
     [self removeKVO];
     _viewController = viewController;
-    self.title = _viewController.title;
+    self.title = _viewController.title ?: _viewController.navigationItem.title;
     [self addKVO];
 }
 
